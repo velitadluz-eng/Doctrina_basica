@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arrepentimiento de Obras Muertas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;0,800;1,400&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: lección en láminas a la izquierda, Bernabé (tutor) como columna a la derecha; en teléfono, Bernabé es una barra inferior que se despliega. */
+:root{
+  --bg:#F4ECEB; --surface:#FFFCFA; --surface-2:#F8F0EE; --ink:#2B1D26; --muted:#6C5763; --line:#E4D3D2;
+  --accent:#7A2E5F; --accent-ink:#FFFFFF; --gold:#C4821A; --gold-soft:#F6E2BE; --rose-soft:#F3D9DF;
+  --ok:#2F7A4F; --ok-soft:#DDEFE3; --bad:#A33B3B; --bad-soft:#F6DEDB;
+  --wool:#FFFFFF; --wool-line:#E2D6DA; --face:#4A2F2C; --cheek:#E8A1A8;
+  --shadow:0 1px 2px rgba(43,29,38,.06),0 8px 28px rgba(43,29,38,.08);
+  --wash-1:rgba(222,140,120,.20); --wash-2:rgba(214,166,72,.20); --wash-3:rgba(150,80,130,.14);
+  --f-display:"Alegreya",Georgia,"Times New Roman",serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#18111A; --surface:#231922; --surface-2:#2B1F2A; --ink:#F4E8EE; --muted:#BCA8B4; --line:#3D2D3B;
+  --accent:#E09AC6; --accent-ink:#2A1022; --gold:#F0B14E; --gold-soft:#4A3519; --rose-soft:#4A2A3B;
+  --ok:#7FD0A0; --ok-soft:#1F3A2A; --bad:#F09A92; --bad-soft:#4A2423;
+  --wool:#F6EFF2; --wool-line:#CBBCC4; --face:#4A2F2C; --cheek:#E8A1A8;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 28px rgba(0,0,0,.35);
+  --wash-1:rgba(222,120,110,.12); --wash-2:rgba(214,160,72,.10); --wash-3:rgba(190,100,170,.12);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#18111A; --surface:#231922; --surface-2:#2B1F2A; --ink:#F4E8EE; --muted:#BCA8B4; --line:#3D2D3B;
+  --accent:#E09AC6; --accent-ink:#2A1022; --gold:#F0B14E; --gold-soft:#4A3519; --rose-soft:#4A2A3B;
+  --ok:#7FD0A0; --ok-soft:#1F3A2A; --bad:#F09A92; --bad-soft:#4A2423;
+  --wool:#F6EFF2; --wool-line:#CBBCC4; --face:#4A2F2C; --cheek:#E8A1A8;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 28px rgba(0,0,0,.35);
+  --wash-1:rgba(222,120,110,.12); --wash-2:rgba(214,160,72,.10); --wash-3:rgba(190,100,170,.12);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.1;margin:0}
+p{margin:0}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1400px;margin:0 auto;padding-inline:24px;padding-block:10px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;flex-direction:column;min-width:0;flex:1}
+.brand small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand strong{font-family:var(--f-display);font-size:19px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rainbow{display:flex;height:4px;border-radius:4px;overflow:hidden;width:72px;flex:none}
+.rainbow i{flex:1}
+.rainbow i:nth-child(1){background:#D9433B}.rainbow i:nth-child(2){background:#EE8A2A}.rainbow i:nth-child(3){background:#EDC531}.rainbow i:nth-child(4){background:#3E9A55}.rainbow i:nth-child(5){background:#3277C2}.rainbow i:nth-child(6){background:#7A4AA8}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px;transition:background .15s,border-color .15s,transform .1s}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn svg{width:18px;height:18px;flex:none}
+.progress{height:3px;background:var(--line)}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));transition:width .35s ease}
+
+/* Main grid */
+.main{max-width:1400px;margin:0 auto;padding-inline:24px;padding-block:20px 32px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
+.stage{min-width:0;display:flex;flex-direction:column;gap:14px}
+.slide{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:44px 48px;min-height:540px;overflow:hidden;isolation:isolate}
+.slide::before{content:"";position:absolute;inset:-20%;z-index:-1;background:
+  radial-gradient(40% 35% at 12% 8%,var(--wash-1),transparent 70%),
+  radial-gradient(35% 30% at 92% 14%,var(--wash-2),transparent 70%),
+  radial-gradient(45% 40% at 80% 100%,var(--wash-3),transparent 70%);pointer-events:none}
+.slide-in{animation:rise .4s ease both}
+@keyframes rise{from{opacity:.0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+.slide h2{font-size:clamp(28px,3.4vw,42px);font-weight:800;margin-bottom:18px}
+.lead{font-size:18px;color:var(--muted);max-width:62ch}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;font-weight:600}
+
+/* Slide parts */
+.cover{display:flex;flex-direction:column;gap:18px;justify-content:center;min-height:440px;max-width:720px}
+.cover h1{font-size:clamp(40px,6vw,76px);font-weight:800;letter-spacing:-.01em}
+.lesson-tag{display:flex;align-items:center;gap:14px;font-family:var(--f-display);font-size:clamp(20px,2.4vw,28px);font-weight:700}
+.roman{font-family:var(--f-display);font-weight:800;color:var(--gold);font-size:1.6em;line-height:1}
+.qs{display:grid;gap:10px;margin:14px 0 24px}
+.qs li{list-style:none;display:flex;gap:10px;align-items:baseline;font-size:18px}
+.qs li::before{content:"?";font-family:var(--f-display);font-weight:800;color:var(--gold);font-size:22px;flex:none}
+.qs{padding:0}
+.verses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.verse{border:1px solid var(--line);background:var(--surface-2);border-radius:16px;padding:18px;text-align:left;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.verse b{font-family:var(--f-display);font-size:22px}
+.verse span{font-size:13px;color:var(--muted)}
+.verse[aria-pressed="true"]{border-color:var(--ok);background:var(--ok-soft)}
+.verse[aria-pressed="true"] span{color:var(--ok);font-weight:600}
+.hint{margin-top:18px;border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:0 14px 14px 0;padding:14px 18px;font-size:17px}
+.quote{font-family:var(--f-display);font-style:italic;font-size:clamp(20px,2.3vw,27px);line-height:1.45;max-width:46ch;margin:8px 0 12px}
+.quote::before{content:"“";color:var(--gold);font-size:1.6em;line-height:0;vertical-align:-.35em;margin-right:4px;font-style:normal}
+.ref{font-weight:700;color:var(--accent);font-size:14px;letter-spacing:.04em}
+.ask{margin-top:26px;display:flex;gap:14px;align-items:flex-start;background:var(--rose-soft);border-radius:16px;padding:16px 18px;max-width:640px}
+.ask p{font-size:17px;font-weight:600}
+.ask i{font-style:normal;font-family:var(--f-display);font-weight:800;color:var(--accent);font-size:28px;line-height:1}
+
+.stairs{display:flex;flex-direction:column-reverse;gap:8px;margin-top:8px}
+.step{display:flex;align-items:center;gap:16px;border:1px solid var(--line);background:var(--surface-2);border-radius:14px;padding:10px 16px;text-align:left;width:calc(58% + var(--n) * 6%);max-width:100%;transition:transform .15s,border-color .15s}
+.step:hover{transform:translateX(4px);border-color:var(--accent)}
+.step .roman{font-size:26px;width:44px;flex:none;text-align:center}
+.step b{font-weight:600;font-size:16px;flex:1;min-width:0}
+.step em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);flex:none}
+.step.today{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.step.today em,.step.today .roman{color:var(--accent-ink)}
+.stairs-note{margin-top:14px;color:var(--muted);font-size:15px;min-height:1.5em}
+
+.greek{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;margin:10px 0 14px}
+.greek b{font-family:var(--f-display);font-size:clamp(52px,8vw,96px);font-weight:800;color:var(--accent);line-height:1}
+.greek span{font-size:18px;color:var(--muted);font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chip{border-radius:999px;padding:8px 16px;font-weight:700;background:var(--gold-soft);font-size:15px}
+
+.cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:6px}
+.flip{border:1px solid var(--line);background:var(--surface-2);border-radius:18px;padding:20px;text-align:left;display:flex;flex-direction:column;gap:10px;min-height:220px;transition:background .2s,border-color .2s}
+.flip h3{font-size:24px;color:var(--accent)}
+.flip .num{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.flip p{font-size:15.5px}
+.flip .tap{margin-top:auto;font-size:13px;color:var(--muted);font-weight:600}
+.flip[aria-expanded="false"] p{display:none}
+.flip[aria-expanded="true"]{background:var(--surface);border-color:var(--accent)}
+.flip[aria-expanded="true"] .tap{display:none}
+
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.vs-col{border-radius:18px;padding:20px;border:1px solid var(--line);background:var(--surface-2)}
+.vs-col h3{font-size:26px;margin-bottom:8px}
+.vs-col.r h3{color:var(--muted)}
+.vs-col.a h3{color:var(--accent)}
+.sorter{margin-top:22px;display:grid;gap:10px}
+.sorter h4,.mini-title{margin:0 0 4px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.srow{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:14px;padding:10px 12px 10px 16px;background:var(--surface)}
+.srow p{flex:1;min-width:0;font-size:15px}
+.srow .pair{display:flex;gap:6px;flex:none}
+.srow .pair .btn{padding:6px 12px;font-size:13px}
+.srow.good{border-color:var(--ok);background:var(--ok-soft)}
+.srow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.srow small{display:block;font-size:13px;margin-top:4px;font-weight:600}
+
+.checklist{display:grid;gap:10px}
+.ind{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surface-2);text-align:left;width:100%}
+.ind .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--muted);flex:none;margin-top:2px;display:grid;place-items:center}
+.ind[aria-pressed="true"]{border-color:var(--ok)}
+.ind[aria-pressed="true"] .box{background:var(--ok);border-color:var(--ok)}
+.ind[aria-pressed="true"] .box::after{content:"";width:6px;height:11px;border:solid var(--surface);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.ind div{flex:1;min-width:0}
+.ind b{font-size:17px;display:block}
+.ind span{font-size:15px;color:var(--muted);display:block}
+.ind .ref{display:inline-block;margin-top:2px}
+.tally{margin-top:12px;font-weight:600;color:var(--muted);font-size:14px}
+
+.def{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:18px}
+.panel{border:1px solid var(--line);border-radius:18px;padding:20px;background:var(--surface-2)}
+.panel h3{font-size:24px;color:var(--accent);margin-bottom:8px}
+.panel p+p{margin-top:10px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.three button{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface);text-align:left;display:flex;flex-direction:column;gap:6px}
+.three button b{font-family:var(--f-display);font-size:19px}
+.three button span{font-size:14px;color:var(--muted)}
+.three button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-soft)}
+.three button[aria-pressed="true"] span{color:var(--ink)}
+
+.tribunal{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}
+.contrast{display:flex;flex-direction:column;gap:10px}
+.contrast div{border-radius:14px;padding:14px 18px;font-family:var(--f-display);font-size:24px;font-weight:700}
+.contrast .yes{background:var(--ok-soft);color:var(--ok)}
+.contrast .no{background:var(--surface-2);color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px}
+.contrast small{display:block;font-family:var(--f-body);font-size:13px;font-weight:600;text-decoration:none}
+
+.keys{display:grid;gap:12px}
+.key{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px}
+.key .roman{font-size:30px;grid-row:span 2}
+.key b{font-family:var(--f-display);font-size:23px}
+.key span{color:var(--muted)}
+.commit{margin-top:20px;display:grid;gap:8px}
+.commit label{font-weight:700}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus,input[type=text]:focus{outline:none;border-color:var(--accent)}
+.saved{font-size:13px;color:var(--ok);font-weight:600;min-height:1.2em}
+
+.close-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px;max-width:640px}
+.mode-card{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:16px;text-align:left;display:flex;gap:12px;align-items:flex-start;transition:border-color .15s,background .15s}
+.mode-card:hover{border-color:var(--accent)}
+.mode-card .ic{width:38px;height:38px;border-radius:12px;background:var(--rose-soft);display:grid;place-items:center;flex:none;color:var(--accent)}
+.mode-card .ic svg{width:20px;height:20px}
+.mode-card b{display:block;font-size:16px}
+.mode-card span{display:block;font-size:13.5px;color:var(--muted);line-height:1.4}
+.mode-card[aria-pressed="true"]{border-color:var(--accent);background:var(--rose-soft)}
+
+/* Tutor */
+.tutor{position:sticky;top:84px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;max-height:calc(100vh - 110px);overflow:hidden}
+.t-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.avatar{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 50% 35%,var(--gold-soft),var(--rose-soft));flex:none;position:relative;display:grid;place-items:center;border:2px solid var(--surface);box-shadow:0 0 0 2px var(--line)}
+.avatar svg{width:88%;height:88%;overflow:visible}
+.tutor.talking .avatar{box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 20%,transparent);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 2px var(--accent),0 0 0 11px color-mix(in srgb,var(--accent) 8%,transparent)}}
+.t-id{flex:1;min-width:0}
+.t-id b{font-family:var(--f-display);font-size:22px;display:block;line-height:1.1}
+.t-id .status{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.t-id .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.tutor.talking .status::before{background:var(--accent)}
+.tutor.thinking .status::before{background:var(--gold);animation:blinkdot 1s infinite}
+@keyframes blinkdot{50%{opacity:.2}}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;flex:none}
+.icon-btn svg{width:18px;height:18px}
+.icon-btn[aria-pressed="false"]{color:var(--muted)}
+.t-mode{display:flex;gap:6px;padding:10px 16px 0;flex-wrap:wrap}
+.t-mode button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--muted)}
+.t-mode button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.t-body{padding:14px 16px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;min-height:0;flex:1}
+.bubble{background:var(--surface-2);border-radius:4px 16px 16px 16px;padding:12px 14px;font-size:15.5px}
+.bubble.me{background:var(--rose-soft);border-radius:16px 4px 16px 16px;align-self:flex-end;max-width:88%}
+.bubble .label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;display:block}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 12px;text-align:left;font-size:14.5px;width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt[disabled]{cursor:default}
+.fb{border-radius:12px;padding:10px 12px;font-size:14.5px}
+.fb.ok{background:var(--ok-soft)}
+.fb.no{background:var(--bad-soft)}
+.fb b{display:block;margin-bottom:2px}
+.muted{color:var(--muted);font-size:13.5px}
+.ask-box{display:flex;gap:8px;align-items:flex-end;border-top:1px solid var(--line);padding:12px 16px}
+.ask-box textarea{min-height:44px;max-height:120px;resize:none}
+.ask-box .btn{flex:none}
+.sumlist{margin:0;padding:0;display:grid;gap:8px}
+.sumlist li{list-style:none;display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.sumlist li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;margin-top:8px}
+.linkish{border:0;background:none;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px;font-size:inherit}
+.t-toggle{display:none}
+
+/* Sheep */
+.sheep .mouth{transform-origin:60px 86px;transition:transform .1s}
+.tutor.talking .sheep .mouth{animation:talk .26s ease-in-out infinite alternate}
+@keyframes talk{from{transform:scaleY(.4)}to{transform:scaleY(1.25)}}
+.sheep .eyes{transform-origin:60px 70px;animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.tutor.thinking .sheep .head{animation:tilt 1.6s ease-in-out infinite}
+@keyframes tilt{50%{transform:rotate(-6deg)}}
+.sheep .head{transform-origin:60px 70px}
+
+@media (max-width:1040px){
+  .main{grid-template-columns:minmax(0,1fr);padding-inline:16px;padding-bottom:110px}
+  .tutor{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:30;border-radius:20px 20px 0 0;max-height:min(72vh,620px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .tutor:not(.open) .t-mode,.tutor:not(.open) .t-body,.tutor:not(.open) .ask-box{display:none}
+  .tutor:not(.open) .t-head{border-bottom:0}
+  .avatar{width:54px;height:54px}
+  .t-toggle{display:grid}
+  .tutor.open .t-toggle svg{transform:rotate(180deg)}
+}
+@media (max-width:760px){
+  .top-in{padding-inline:16px}
+  .slide{padding:26px 20px;min-height:0;border-radius:18px}
+  .verses,.cards3,.versus,.def,.three,.tribunal,.close-grid{grid-template-columns:minmax(0,1fr)}
+  .flip{min-height:0}
+  .step{width:100%}
+  .srow{flex-direction:column;align-items:stretch}
+  .brand small{display:none}
+  .rainbow{display:none}
+}
+.drawer{position:fixed;inset:0;z-index:50;display:flex}
+.drawer[hidden]{display:none!important}
+.scrim{position:absolute;inset:0;background:rgba(20,10,18,.45)}
+.drawer-in{position:relative;margin-left:auto;width:min(380px,92vw);height:100%;background:var(--surface);padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-top:calc(20px + env(safe-area-inset-top,0px))}
+.drawer-in h3{font-size:24px;margin-bottom:8px}
+.ruta-item{display:flex;gap:12px;align-items:baseline;border:0;background:transparent;text-align:left;padding:10px 12px;border-radius:12px;font-size:15px}
+.ruta-item:hover{background:var(--surface-2)}
+.ruta-item[aria-current="true"]{background:var(--rose-soft);font-weight:700}
+.ruta-item span{font-variant-numeric:tabular-nums;color:var(--muted);width:22px;flex:none;font-size:13px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="top-in">
+      <div class="brand">
+        <small>Doctrina Básica del Cristianismo · Escalera de Crecimiento Espiritual</small>
+        <strong>I. Arrepentimiento de Obras Muertas</strong>
+      </div>
+      <div class="rainbow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <button class="btn" id="rutaBtn" data-act="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Ruta</button>
+    </div>
+    <div class="progress"><span id="prog" style="width:0"></span></div>
+  </header>
+
+  <main class="main">
+    <section class="stage" aria-live="polite">
+      <article class="slide" id="slide"></article>
+      <div class="nav">
+        <button class="btn" data-act="prev" id="prevBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>Anterior</button>
+        <span class="count" id="count"></span>
+        <button class="btn primary" data-act="next" id="nextBtn">Siguiente<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <aside class="tutor open" id="tutor" aria-label="Bernabé, tu tutor">
+      <div class="t-head">
+        <div class="avatar" aria-hidden="true">
+          <svg class="sheep" viewBox="0 0 120 120">
+            <g class="head">
+              <g fill="var(--wool)" stroke="var(--wool-line)" stroke-width="1.5">
+                <circle cx="34" cy="44" r="16"/><circle cx="50" cy="32" r="17"/><circle cx="70" cy="32" r="17"/><circle cx="86" cy="44" r="16"/>
+                <circle cx="28" cy="62" r="14"/><circle cx="92" cy="62" r="14"/><circle cx="34" cy="82" r="14"/><circle cx="86" cy="82" r="14"/>
+                <circle cx="48" cy="98" r="14"/><circle cx="72" cy="98" r="14"/><circle cx="60" cy="102" r="13"/>
+              </g>
+              <ellipse cx="24" cy="66" rx="13" ry="7" fill="var(--face)" transform="rotate(-22 24 66)"/>
+              <ellipse cx="96" cy="66" rx="13" ry="7" fill="var(--face)" transform="rotate(22 96 66)"/>
+              <ellipse cx="60" cy="72" rx="25" ry="28" fill="var(--face)"/>
+              <g fill="var(--wool)" stroke="var(--wool-line)" stroke-width="1.5">
+                <circle cx="48" cy="46" r="10"/><circle cx="60" cy="42" r="11"/><circle cx="72" cy="46" r="10"/>
+              </g>
+              <g class="eyes">
+                <ellipse cx="50" cy="68" rx="5" ry="6" fill="#FFFFFF"/><ellipse cx="70" cy="68" rx="5" ry="6" fill="#FFFFFF"/>
+                <circle cx="51" cy="69" r="3" fill="#1B1013"/><circle cx="71" cy="69" r="3" fill="#1B1013"/>
+                <circle cx="52.2" cy="67.6" r="1" fill="#FFFFFF"/><circle cx="72.2" cy="67.6" r="1" fill="#FFFFFF"/>
+              </g>
+              <ellipse cx="42" cy="80" rx="5" ry="3" fill="var(--cheek)" opacity=".75"/>
+              <ellipse cx="78" cy="80" rx="5" ry="3" fill="var(--cheek)" opacity=".75"/>
+              <ellipse cx="60" cy="80" rx="4" ry="2.6" fill="#2A1A18"/>
+              <g class="mouth"><path d="M53 86 Q60 92 67 86 Q60 89 53 86Z" fill="#2A1A18" stroke="#2A1A18" stroke-width="1.5" stroke-linejoin="round"/></g>
+            </g>
+          </svg>
+        </div>
+        <div class="t-id">
+          <b>Bernabé</b>
+          <span class="status" id="status">Listo para acompañarte</span>
+        </div>
+        <button class="icon-btn" id="voiceBtn" data-act="voice" aria-pressed="true" title="Voz de Bernabé">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path class="w1" d="M15.5 8.5a5 5 0 010 7"/><path class="w2" d="M18.5 5.5a9 9 0 010 13"/></svg>
+        </button>
+        <button class="icon-btn t-toggle" data-act="toggleTutor" title="Mostrar u ocultar a Bernabé"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 15l6-6 6 6"/></svg></button>
+      </div>
+      <div class="t-mode" id="modeBar" role="group" aria-label="Modo">
+        <button data-act="mode" data-mode="acompana" aria-pressed="false">Acompáñame</button>
+        <button data-act="mode" data-mode="ensena" aria-pressed="false">Enséñame</button>
+        <button data-act="mode" data-mode="reta" aria-pressed="false">Rétame</button>
+        <button data-act="mode" data-mode="resume" aria-pressed="false">Resúmeme</button>
+      </div>
+      <div class="fb no" id="voiceNote" hidden style="margin:10px 16px 0;display:flex;gap:10px;align-items:center;justify-content:space-between"><span id="voiceMsg"></span><button class="btn" data-act="replay" style="flex:none">Escuchar</button></div>
+      <div class="t-body" id="tbody"></div>
+      <form class="ask-box" id="askBox" hidden>
+        <textarea id="askInput" rows="1" placeholder="Escríbele tu pregunta a Bernabé…" aria-label="Tu pregunta"></textarea>
+        <button class="btn primary" type="submit" id="askSend">Enviar</button>
+      </form>
+    </aside>
+  </main>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="scrim" data-act="closeRuta"></div>
+  <nav class="drawer-in" aria-label="Ruta de la lección">
+    <h3>Ruta de la lección</h3>
+    <div id="rutaList" style="display:grid;gap:2px"></div>
+  </nav>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem("bern1:"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("bern1:"+k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const ICON={
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>',
+  teach:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20l4-4 4 4M8 12V9M12 12V7M16 12v-2"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>'
+};
+const MODES=[
+  {k:"acompana",n:"Acompáñame",d:"Pregunta lo que quieras y decide cómo continuar.",i:ICON.chat},
+  {k:"ensena",n:"Enséñame",d:"Bernabé explica y guía cada lámina.",i:ICON.teach},
+  {k:"reta",n:"Rétame",d:"Responde casos y justifica tus decisiones.",i:ICON.target},
+  {k:"resume",n:"Resúmeme",d:"Repasa lo esencial y detecta tus vacíos.",i:ICON.check}
+];
+const modeCards=()=>'<div class="close-grid">'+MODES.map(m=>`<button class="mode-card" data-act="mode" data-mode="${m.k}" aria-pressed="${state.mode===m.k}"><span class="ic">${m.i}</span><span><b>${m.n}</b><span>${m.d}</span></span></button>`).join("")+'</div>';
+
+/* ---------- Contenido de las láminas (tomado del PDF) ---------- */
+const STEPS=["Arrepentimiento de Obras Muertas","La Fe en Dios","La Doctrina de Bautismos","La imposición de manos","La resurrección de los muertos","El Juicio Eterno","La Santa Cena"];
+const ROMAN=["I","II","III","IV","V","VI","VII"];
+const SORT=[
+  {t:"Me disculpo porque me descubrieron y no quiero perder mi trabajo.",v:"R"},
+  {t:"Reconozco que he ofendido al Señor y quiero cambiar.",v:"A"},
+  {t:"Me siento mal solo porque tuve que pagar una multa.",v:"R"},
+  {t:"Admito mi condición delante de Dios, aunque nadie más lo sepa.",v:"A"}
+];
+const INDS=[
+  {b:"Tristeza a causa de nuestro pecado",s:"Nos causa verdadera tristeza ofender a Dios.",r:"2 Corintios 7:10"},
+  {b:"Confesión de pecado",s:"Con la confesión nos deshacemos del pecado.",r:"Salmos 32:5"},
+  {b:"Apartarse del pecado",s:"",r:"Proverbios 28:13"},
+  {b:"Odiar el pecado",s:"",r:"Proverbios 8:13"},
+  {b:"Restitución",s:"",r:"Lucas 19:8"}
+];
+const ui={read:store.get("read",{}),flip:{},sort:{},ind:store.get("ind",{}),three:{},hint:false,stepNote:""};
+
+const SLIDES=[
+ {t:"Portada",
+  html:()=>`<div class="cover">
+    <p class="eyebrow">Misión Cristiana Incluyente</p>
+    <h1>Doctrina Básica del Cristianismo</h1>
+    <div class="lesson-tag"><span class="roman">I</span><span>Arrepentimiento de Obras Muertas</span></div>
+    <p class="lead">Escalera de Crecimiento Espiritual. Recorre la lección a tu ritmo y elige cómo quieres que Bernabé te acompañe.</p>
+    <div class="row"><button class="btn primary" data-act="next">Comenzar la lección</button></div>
+  </div>`,
+  teach:"¡Hola! Soy Bernabé. Mi nombre significa hijo de consolación, y voy a caminar contigo en esta lección. Hoy subimos el primer escalón de la Escalera de Crecimiento Espiritual: el arrepentimiento de obras muertas. Cuando quieras, pasamos a la siguiente lámina.",
+  reflect:"¿Qué esperas aprender o recibir de Dios en esta lección?"},
+ {t:"El principio fundamental",
+  html:()=>`<p class="eyebrow">Actividad en grupo</p><h2>El principio fundamental</h2>
+    <p class="lead">Lee los siguientes versículos y comenta con todo el grupo:</p>
+    <ul class="qs"><li>¿Qué tienen en común?</li><li>¿De qué tema están hablando los tres?</li></ul>
+    <div class="verses">${["1 Corintios 3:11","Juan 14:6","Efesios 2:20"].map((v,k)=>`<button class="verse" data-act="read" data-k="${k}" aria-pressed="${!!ui.read[k]}"><b>${v}</b><span>${ui.read[k]?"Leído ✓":"Toca cuando lo hayas leído"}</span></button>`).join("")}</div>
+    ${ui.hint?`<div class="hint"><b>Pista de Bernabé:</b> fíjate en el título de esta lámina. Los tres pasajes hablan del fundamento sobre el que se construye todo lo demás: Jesucristo.</div>`:`<div class="row" style="margin-top:18px"><button class="btn" data-act="hint">Ver pista</button></div>`}`,
+  teach:"Antes de empezar, busca en tu Biblia tres versículos: primera de Corintios tres once, Juan catorce seis y Efesios dos veinte. Léelos con calma y pregúntate qué tienen en común y de qué tema hablan los tres. Coméntalo con tu grupo, y si te atoras, toca Ver pista.",
+  reflect:"Después de leer los tres versículos: ¿sobre qué fundamento estás construyendo tu vida hoy?"},
+ {t:"Fundamentos de la doctrina",
+  html:()=>`<p class="eyebrow">Hebreos 6</p><h2>Fundamentos de la Doctrina</h2>
+    <p class="quote">Por tanto, dejando ya los rudimentos de la doctrina de Cristo, vamos adelante a la perfección; no echando otra vez el fundamento del arrepentimiento de obras muertas, de la fe en Dios, de la doctrina de bautismos, de la imposición de manos, de la resurrección de los muertos y del juicio eterno. Y esto haremos, si Dios en verdad lo permite.”</p>
+    <p class="ref">HEBREOS 6:1-3</p>
+    <div class="ask"><i>?</i><p>¿Qué necesitamos para crecer y avanzar a la madurez?</p></div>`,
+  teach:"Hebreos seis nos habla de los rudimentos, es decir, lo básico de la doctrina de Cristo. El texto nos invita a ir adelante, hacia la madurez. Y aquí está la pregunta para pensar: ¿qué necesitamos para crecer y avanzar a la madurez?",
+  reflect:"¿Qué necesitamos para crecer y avanzar a la madurez? ¿Qué te falta a ti para dar el siguiente paso?"},
+ {t:"Los siete fundamentos",
+  html:()=>`<p class="eyebrow">Escalera de Crecimiento Espiritual</p><h2>Fundamentos</h2>
+    <div class="stairs">${STEPS.map((s,k)=>`<button class="step ${k===0?"today":""}" style="--n:${k}" data-act="step" data-k="${k}"><span class="roman">${ROMAN[k]}</span><b>${s}</b><em>${k===0?"Hoy":"Próximo"}</em></button>`).join("")}</div>
+    <p class="stairs-note" id="stairsNote">${ui.stepNote||"Toca un escalón para ver en qué lección lo estudiaremos."}</p>`,
+  teach:"Estos son los siete fundamentos que vamos a estudiar, como los escalones de una escalera. Empezamos desde abajo. Hoy subimos el primero: el arrepentimiento de obras muertas. Después vendrán la fe en Dios, la doctrina de bautismos, la imposición de manos, la resurrección de los muertos, el juicio eterno y la Santa Cena.",
+  reflect:"De los siete fundamentos, ¿cuál te causa más curiosidad o preguntas?"},
+ {t:"¿Qué es arrepentimiento?",
+  html:()=>`<p class="eyebrow">Fundamento I</p><h2>Arrepentimiento de Obras Muertas</h2>
+    <div class="greek"><b>μετάνοια</b><span>metanoia, palabra griega</span></div>
+    <p class="lead" style="color:var(--ink);font-size:20px">El arrepentimiento viene de la palabra griega <i>metanoia</i>, que significa cambiar de mente, de corazón y de acción.</p>
+    <div class="chips"><span class="chip">Mente</span><span class="chip">Corazón</span><span class="chip">Acción</span></div>`,
+  teach:"La palabra arrepentimiento viene del griego metanoia. Significa cambiar de mente, de corazón y de acción. No es solo sentirse mal: es un cambio completo que empieza por dentro y se ve por fuera.",
+  reflect:"¿Alguna vez has vivido un cambio de mente que también cambió tu forma de actuar?"},
+ {t:"El arrepentimiento incluye",
+  html:()=>`<p class="eyebrow">Tres cambios</p><h2>El arrepentimiento incluye:</h2>
+    <div class="cards3">${[
+      ["Cambio de mente","La persona admite que está equivocada y reconoce su condición delante de Dios."],
+      ["Cambio de corazón","Recibe la convicción del Espíritu Santo acerca de su pecado y decide no continuar con esa manera de vivir. Empieza a dar frutos de ese arrepentimiento."],
+      ["Cambio de acción","La persona que se arrepiente verdaderamente de sus pecados se aparta del pecado, de lugares, de cosas materiales y de las personas que la inducen a desobedecer a Dios."]
+    ].map((c,k)=>`<button class="flip" data-act="flip" data-k="${k}" aria-expanded="${!!ui.flip[k]}"><span class="num">${k+1} de 3</span><h3>${c[0]}</h3><p>${c[1]}</p><span class="tap">Toca para descubrir</span></button>`).join("")}</div>`,
+  teach:"El arrepentimiento incluye tres cambios. Cambio de mente: admito que estoy equivocado y reconozco mi condición delante de Dios. Cambio de corazón: recibo la convicción del Espíritu Santo y decido no seguir viviendo así, y empiezo a dar frutos. Y cambio de acción: me aparto del pecado, de los lugares, las cosas y las personas que me llevan a desobedecer a Dios. Toca cada tarjeta para verlas.",
+  reflect:"De estos tres cambios, ¿cuál te cuesta más: el de mente, el de corazón o el de acción?"},
+ {t:"Remordimiento vs arrepentimiento",
+  html:()=>`<p class="eyebrow">No es lo mismo</p><h2>Remordimiento vs Arrepentimiento</h2>
+    <div class="versus">
+      <div class="vs-col r"><h3>Remordimiento</h3><p>Acepto mi pecado o condición por temor a las consecuencias.</p></div>
+      <div class="vs-col a"><h3>Arrepentimiento</h3><p>Reconozco mi condición de pecado y, sobre todo, reconozco que he ofendido al Señor.</p></div>
+    </div>
+    <div class="sorter"><h4>Ponte a prueba: ¿remordimiento o arrepentimiento?</h4>
+    ${SORT.map((s,k)=>{const a=ui.sort[k];const cls=a?(a===s.v?"good":"wrong"):"";return `<div class="srow ${cls}"><p>${s.t}${a?`<small>${a===s.v?"¡Bien!":"Revisa otra vez:"} es ${s.v==="R"?"remordimiento":"arrepentimiento"}.</small>`:""}</p><div class="pair"><button class="btn" data-act="sort" data-k="${k}" data-v="R">Remordimiento</button><button class="btn" data-act="sort" data-k="${k}" data-v="A">Arrepentimiento</button></div></div>`}).join("")}
+    </div>`,
+  teach:"Aquí hay una diferencia importante. El remordimiento acepta el pecado por temor a las consecuencias. El arrepentimiento reconoce mi condición y, sobre todo, que he ofendido al Señor. Abajo tienes cuatro frases: clasifícalas para practicar.",
+  reflect:"Piensa en la última vez que pediste perdón. ¿Fue más por las consecuencias o porque reconociste que habías ofendido a Dios?"},
+ {t:"Indicadores de verdadero arrepentimiento",
+  html:()=>{const n=INDS.filter((_,k)=>ui.ind[k]).length;return `<p class="eyebrow">Señales</p><h2>Indicadores de verdadero arrepentimiento</h2>
+    <p class="lead" style="margin-bottom:14px">Busca cada cita en tu Biblia y márcala cuando la hayas leído.</p>
+    <div class="checklist">${INDS.map((x,k)=>`<button class="ind" data-act="ind" data-k="${k}" aria-pressed="${!!ui.ind[k]}"><span class="box"></span><div><b>${x.b}</b>${x.s?`<span>${x.s}</span>`:""}<span class="ref">${x.r}</span></div></button>`).join("")}</div>
+    <p class="tally">${n} de 5 citas leídas</p>`},
+  teach:"¿Cómo sé que mi arrepentimiento es verdadero? Hay cinco indicadores. Tristeza a causa de nuestro pecado, porque nos duele ofender a Dios. Confesión de pecado, porque con la confesión nos deshacemos de él. Apartarse del pecado. Odiar el pecado. Y restitución. Cada uno tiene una cita bíblica: búscalas y márcalas al leerlas.",
+  reflect:"¿Cuál de estos cinco indicadores ves más claro en tu vida? ¿Cuál te gustaría fortalecer?"},
+ {t:"¿Qué son las obras muertas?",
+  html:()=>`<p class="eyebrow">Definiciones</p><h2>Arrepentimiento de obras muertas</h2>
+    <div class="def">
+      <div class="panel"><h3>Arrepentimiento</h3><p>Viene de la palabra griega <i>metanoia</i>, que significa cambiar de mente, de corazón y acción.</p></div>
+      <div class="panel"><h3>Obras muertas</h3><p>Todo aquello que hacemos y no es iniciado por Dios. Es cualquier cosa que hacemos en el momento equivocado, con el motivo equivocado y la intención equivocada.</p><p>Hacer obras buenas no significa que se esté haciendo la voluntad de Dios. Son esas cosas que hacemos para el trabajo de Dios, con la motivación incorrecta.</p></div>
+    </div>
+    <p class="mini-title" style="margin-top:20px">Antes de servir, pregúntate</p>
+    <div class="three">${[["¿Lo inició Dios?","¿O fue solo idea mía?"],["¿Es el momento?","¿Estoy esperando el tiempo correcto?"],["¿Cuál es mi motivo?","¿Qué intención hay en mi corazón?"]].map((x,k)=>`<button data-act="three" data-k="${k}" aria-pressed="${!!ui.three[k]}"><b>${x[0]}</b><span>${x[1]}</span></button>`).join("")}</div>`,
+  teach:"Ahora juntemos todo. Las obras muertas son todo aquello que hacemos y no es iniciado por Dios: lo que hacemos en el momento equivocado, con el motivo equivocado o con la intención equivocada. Ojo: hacer obras buenas no significa que se esté haciendo la voluntad de Dios. Incluso las cosas que hacemos para el trabajo de Dios pueden ser obras muertas si la motivación es incorrecta.",
+  reflect:"Piensa en algo que haces en la iglesia o en tu comunidad. ¿Lo inició Dios? ¿Cuál es tu motivo?"},
+ {t:"¿Qué pasa si hago obras muertas?",
+  html:()=>`<p class="eyebrow">Consecuencia</p><h2>¿Qué pasa si hago obras muertas?</h2>
+    <p class="lead" style="margin-bottom:10px">Esas obras muertas serán juzgadas en el Tribunal de Cristo.</p>
+    <p class="quote">…porque es necesario que todos nosotros comparezcamos ante el tribunal de Cristo, para que cada uno reciba según lo que haya hecho mientras estaba en el cuerpo, sea bueno o sea malo.”</p>
+    <p class="ref">2 CORINTIOS 5:10</p>
+    <div class="ask"><i>!</i><p>Todo creyente debe entender que cada uno dará cuentas al Señor en el día del juicio en el tribunal de Cristo.</p></div>`,
+  teach:"¿Y qué pasa con las obras muertas? Segunda de Corintios cinco diez nos dice que todos compareceremos ante el tribunal de Cristo, para que cada uno reciba según lo que haya hecho. Todo creyente debe entender que dará cuentas al Señor.",
+  reflect:"¿Cómo te hace sentir saber que darás cuentas al Señor de lo que haces? ¿Por qué?"},
+ {t:"El Tribunal de Cristo",
+  html:()=>`<p class="eyebrow">Para entenderlo bien</p><h2>¿Qué es el Tribunal de Cristo?</h2>
+    <div class="tribunal">
+      <div><p style="font-size:18px">Es el lugar donde seremos juzgados <b>todos los creyentes</b> por todo lo que hicimos aquí en la tierra.</p>
+      <p style="margin-top:16px;font-weight:700">¿Qué se tomará en cuenta?</p>
+      <p style="font-family:var(--f-display);font-size:26px;color:var(--accent);margin-top:4px">La intención y los motivos del corazón.</p>
+      <p class="ref" style="margin-top:14px">1 CORINTIOS 4:5 · 1 CORINTIOS 3:12-15</p></div>
+      <div class="contrast"><div class="yes"><small>Es un tribunal para recibir</small>Galardones</div><div class="no"><small>No es para recibir</small>Condenación</div></div>
+    </div>`,
+  teach:"Esto es muy importante: el tribunal de Cristo es para los creyentes, y no es para recibir condenación, sino galardones. Lo que se tomará en cuenta es la intención y los motivos del corazón. Puedes leer primera de Corintios cuatro cinco y tres doce al quince.",
+  reflect:"Si lo que cuenta son los motivos del corazón, ¿qué motivo quieres que tenga lo que haces esta semana?"},
+ {t:"¿Cómo evitar hacer obras muertas?",
+  html:()=>`<p class="eyebrow">Tres claves</p><h2>¿Cómo evitar hacer Obras Muertas?</h2>
+    <div class="keys">
+      <div class="key"><span class="roman">1</span><b>Hacer todo en nombre de Jesús</b><span>Así desde un principio tendremos el respaldo de Dios. Sabremos desde un principio que no vamos por nuestras propias fuerzas. <span class="ref">Colosenses 3:17</span></span></div>
+      <div class="key"><span class="roman">2</span><b>Hacer todo para la gloria de Dios</b><span>Esto nos garantiza que nuestro motivo es válido: lo estamos haciendo para engrandecer el Reino de Dios. <span class="ref">1 Corintios 10:31</span></span></div>
+      <div class="key"><span class="roman">3</span><b>Hacerlo con todo el corazón</b><span>Dar lo mejor de nosotros mismos.</span></div>
+    </div>
+    <div class="commit"><label for="commitTxt">Mi compromiso para esta semana</label>
+    <textarea id="commitTxt" rows="2" placeholder="Por ejemplo: antes de servir el domingo, voy a orar por mis motivos.">${esc(store.get("commit",""))}</textarea><span class="saved" id="savedNote"></span></div>`,
+  teach:"¿Cómo evitamos las obras muertas? Tres claves. Hacer todo en nombre de Jesús, así sabemos que no vamos por nuestras propias fuerzas. Hacer todo para la gloria de Dios, así nuestro motivo es válido. Y hacerlo con todo el corazón, dando lo mejor de nosotros. Te invito a escribir un compromiso para esta semana.",
+  reflect:"¿Qué cosa concreta harás esta semana en nombre de Jesús, para su gloria y con todo el corazón?"},
+ {t:"Cierre",
+  html:()=>`<p class="eyebrow">Escalón I completado</p><h2>¡Subiste el primer escalón!</h2>
+    <p class="lead">Ya conoces qué es el arrepentimiento, cómo se distingue del remordimiento y cómo evitar las obras muertas. Antes de seguir, practica con Bernabé.</p>
+    ${modeCards()}`,
+  teach:"¡Felicidades, terminaste la primera lección! Si quieres reforzar lo aprendido, elige Rétame para practicar con casos, o Resúmeme para repasar lo esencial.",
+  reflect:"¿Qué es lo más importante que te llevas de esta lección?"}
+];
+
+/* ---------- Rétame ---------- */
+const CASES=[
+ {s:6,q:"Marta llega tarde al trabajo varias veces. Solo se disculpa cuando su jefe le advierte que le descontará el día.",p:"¿Qué está viviendo Marta?",o:[
+   {t:"Remordimiento",ok:1,f:"Acepta su falta por temor a las consecuencias, no porque reconozca que ofendió a alguien."},
+   {t:"Arrepentimiento",ok:0,f:"El arrepentimiento reconoce que se ha ofendido al Señor. Marta reacciona solo ante la consecuencia."}]},
+ {s:5,q:"Pedro dice: «Sé que estoy mal y quiero cambiar», pero sigue yendo a los mismos lugares y con las mismas personas que lo hacen caer.",p:"¿Qué parte del arrepentimiento le falta?",o:[
+   {t:"Cambio de mente",ok:0,f:"Ese ya lo tiene: admite que está equivocado."},
+   {t:"Cambio de acción",ok:1,f:"Quien se arrepiente se aparta del pecado, de lugares, cosas y personas que lo inducen a desobedecer a Dios."},
+   {t:"Ninguna, ya se arrepintió",ok:0,f:"El arrepentimiento es cambio de mente, corazón y acción. Falta que se vea en lo que hace."}]},
+ {s:8,q:"Luis dirige la alabanza cada domingo y lo hace muy bien, pero en el fondo lo hace para que lo feliciten.",p:"¿Cómo lo describirías?",o:[
+   {t:"Es una buena obra, así que agrada a Dios",ok:0,f:"La lección dice que hacer obras buenas no significa que se esté haciendo la voluntad de Dios."},
+   {t:"Puede ser una obra muerta",ok:1,f:"Son obras muertas las que hacemos para el trabajo de Dios con la motivación incorrecta."}]},
+ {s:7,q:"Ana se da cuenta de que ha hablado mal de una compañera. Lo confiesa a Dios, deja de hacerlo y además va con ella a pedirle perdón y a aclarar lo que dijo.",p:"Ir con su compañera a reparar el daño es un ejemplo de…",o:[
+   {t:"Restitución",ok:1,f:"Reparar el daño es restitución (Lucas 19:8), uno de los indicadores de verdadero arrepentimiento."},
+   {t:"Remordimiento",ok:0,f:"Ana no actúa por miedo a las consecuencias; actúa porque reconoce su falta y quiere repararla."},
+   {t:"Obra muerta",ok:0,f:"Una obra muerta es la que no inicia Dios o se hace con un motivo equivocado. Aquí hay un arrepentimiento genuino."}]},
+ {s:10,q:"Alguien del grupo comenta con miedo: «El tribunal de Cristo es para condenar a los creyentes».",p:"¿Qué le responderías según la lección?",o:[
+   {t:"Que tiene razón y debe tener miedo",ok:0,f:"La lección dice que no es para recibir condenación."},
+   {t:"Que es para recibir galardones, y cuentan los motivos del corazón",ok:1,f:"Es un tribunal para recibir galardones, no condenación. Se toma en cuenta la intención y los motivos del corazón."}]},
+ {s:11,q:"Sofía va a organizar un convivio en la iglesia y quiere que no sea una obra muerta.",p:"¿Qué le recomendarías?",o:[
+   {t:"Hacerlo en nombre de Jesús, para la gloria de Dios y con todo el corazón",ok:1,f:"Son las tres claves de la lección para evitar las obras muertas."},
+   {t:"Que salga perfecto para que todos la reconozcan",ok:0,f:"Si el motivo es el reconocimiento, el motivo es equivocado, aunque la obra sea buena."}]}
+];
+
+/* ---------- Resúmeme ---------- */
+const SUMMARY=[
+ {t:"Arrepentimiento viene del griego metanoia: cambiar de mente, de corazón y de acción.",s:4},
+ {t:"El remordimiento acepta el pecado por temor a las consecuencias; el arrepentimiento reconoce que hemos ofendido al Señor.",s:6},
+ {t:"Indicadores: tristeza por el pecado, confesión, apartarse, odiar el pecado y restitución.",s:7},
+ {t:"Obras muertas: lo que hacemos sin que Dios lo inicie, en el momento, con el motivo o la intención equivocados.",s:8},
+ {t:"El Tribunal de Cristo es para recibir galardones, no condenación; cuentan los motivos del corazón.",s:10},
+ {t:"Para evitarlas: en nombre de Jesús, para la gloria de Dios y con todo el corazón.",s:11}
+];
+const QUIZ=[
+ {q:"Metanoia significa solo sentirse mal por lo que hice.",a:false,s:4,f:"Significa cambiar de mente, de corazón y de acción."},
+ {q:"Una obra buena siempre es hacer la voluntad de Dios.",a:false,s:8,f:"Hacer obras buenas no significa que se esté haciendo la voluntad de Dios."},
+ {q:"En el Tribunal de Cristo se toman en cuenta la intención y los motivos del corazón.",a:true,s:10,f:"Así lo dice la lección (1 Corintios 4:5)."},
+ {q:"La restitución es uno de los indicadores de verdadero arrepentimiento.",a:true,s:7,f:"Lucas 19:8."},
+ {q:"Aceptar mi falta solo por miedo a las consecuencias es arrepentimiento.",a:false,s:6,f:"Eso es remordimiento."}
+];
+
+const LESSON_TEXT=[
+ "Doctrina Básica del Cristianismo. Escalera de Crecimiento Espiritual. Misión Cristiana Incluyente. Lección I: Arrepentimiento de Obras Muertas.",
+ "El principio fundamental: leer 1 Corintios 3:11, Juan 14:6 y Efesios 2:20 y comentar qué tienen en común y de qué tema hablan.",
+ "Hebreos 6:1-3: dejando ya los rudimentos de la doctrina de Cristo, vamos adelante a la perfección; no echando otra vez el fundamento del arrepentimiento de obras muertas, de la fe en Dios, de la doctrina de bautismos, de la imposición de manos, de la resurrección de los muertos y del juicio eterno. Pregunta: ¿Qué necesitamos para crecer y avanzar a la madurez?",
+ "Fundamentos: I Arrepentimiento de Obras Muertas, II La Fe en Dios, III La Doctrina de Bautismos, IV La imposición de manos, V La resurrección de los muertos, VI El Juicio Eterno, VII La Santa Cena.",
+ "Arrepentimiento viene de la palabra griega metanoia: cambiar de mente, de corazón y acción.",
+ "El arrepentimiento incluye: cambio de mente (la persona admite que está equivocada y reconoce su condición delante de Dios); cambio de corazón (recibe la convicción del Espíritu Santo acerca de su pecado, decide no continuar con esa manera de vivir y empieza a dar frutos); cambio de acción (se aparta del pecado, de lugares, cosas materiales y personas que la inducen a desobedecer a Dios).",
+ "Remordimiento: acepto mi pecado o condición por temor a las consecuencias. Arrepentimiento: reconozco mi condición de pecado y, sobre todo, que he ofendido al Señor.",
+ "Indicadores de verdadero arrepentimiento: tristeza a causa de nuestro pecado (2 Corintios 7:10); confesión de pecado (Salmos 32:5); apartarse del pecado (Proverbios 28:13); odiar el pecado (Proverbios 8:13); restitución (Lucas 19:8).",
+ "Obras muertas: todo aquello que hacemos y no es iniciado por Dios; lo que hacemos en el momento equivocado, con el motivo equivocado y la intención equivocada. Hacer obras buenas no significa que se esté haciendo la voluntad de Dios; son cosas que hacemos para el trabajo de Dios con la motivación incorrecta.",
+ "¿Qué pasa si hago obras muertas? Serán juzgadas en el Tribunal de Cristo (2 Corintios 5:10). Cada creyente dará cuentas al Señor.",
+ "El Tribunal de Cristo: lugar donde todos los creyentes seremos juzgados por lo que hicimos en la tierra; es para recibir galardones, no condenación. Se toma en cuenta la intención y los motivos del corazón (1 Corintios 4:5; 3:12-15).",
+ "Cómo evitar obras muertas: hacer todo en nombre de Jesús (Colosenses 3:17), hacer todo para la gloria de Dios (1 Corintios 10:31), hacerlo con todo el corazón."
+].join("\n");
+
+/* ---------- Estado ---------- */
+const state={i:Math.min(store.get("slide",0),SLIDES.length-1),mode:store.get("mode",null),voice:store.get("voice",true),chat:[],caseI:0,caseAns:{},quizAns:{},busy:false};
+let sample=null, ctl=null;
+
+/* ---------- Voz ---------- */
+const synth=("speechSynthesis" in window)?window.speechSynthesis:null;
+let esVoice=null;
+function pickVoice(){if(!synth)return;try{const v=synth.getVoices();esVoice=v.find(x=>/es[-_]MX/i.test(x.lang))||v.find(x=>/^es/i.test(x.lang))||null}catch(e){}}
+if(synth){pickVoice();try{synth.onvoiceschanged=pickVoice}catch(e){}}
+function setStatus(kind,label){const t=$("#tutor");t.classList.toggle("talking",kind==="talking");t.classList.toggle("thinking",kind==="thinking");$("#status").textContent=label}
+function idle(){setStatus("idle",state.mode?"Modo "+MODES.find(m=>m.k===state.mode).n:"Listo para acompañarte")}
+let lastSpoken="", speakGen=0, unlocked=false, startTimer=null, keepAlive=null;
+function voiceNote(msg){const n=$("#voiceNote");if(!n)return;$("#voiceMsg").textContent=msg||"";n.hidden=!msg}
+/* iPhone/iPad y algunos navegadores solo permiten voz si el primer intento ocurre dentro de un toque */
+function unlockVoice(){
+  if(unlocked||!synth)return; unlocked=true;
+  try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;u.lang="es-MX";synth.speak(u)}catch(e){}
+}
+document.addEventListener("pointerdown",unlockVoice,{capture:true});
+document.addEventListener("keydown",unlockVoice,{capture:true});
+function stopVoice(){speakGen++;clearTimeout(startTimer);clearInterval(keepAlive);if(synth){try{if(synth.speaking||synth.pending)synth.cancel()}catch(e){}}}
+function speak(text){
+  lastSpoken=text;
+  const wasBusy=synth&&(synth.speaking||synth.pending);
+  stopVoice();
+  if(!state.voice)return;
+  if(!synth){voiceNote("Este navegador no tiene voz disponible. Puedes leer a Bernabé aquí.");return}
+  const gen=speakGen;
+  /* Partir en oraciones evita que Chrome corte la voz a los ~15 segundos */
+  const parts=text.replace(/[«»“”*]/g,"").match(/[^.!?¿¡]*[.!?]+|[^.!?]+$/g)||[text];
+  const chunks=[];parts.forEach(p=>{p=p.trim();if(!p)return;if(chunks.length&&chunks[chunks.length-1].length+p.length<180)chunks[chunks.length-1]+=" "+p;else chunks.push(p)});
+  const run=()=>{
+    if(gen!==speakGen)return;
+    let started=false;
+    chunks.forEach((c,idx)=>{
+      const u=new SpeechSynthesisUtterance(c);
+      u.lang="es-MX"; if(esVoice)u.voice=esVoice; u.rate=1; u.pitch=1.15;
+      u.onstart=()=>{started=true;voiceNote("");if(gen===speakGen)setStatus("talking","Hablando")};
+      if(idx===chunks.length-1)u.onend=()=>{if(gen===speakGen){clearInterval(keepAlive);idle()}};
+      u.onerror=ev=>{if(gen!==speakGen)return;clearInterval(keepAlive);idle();if(ev&&ev.error&&ev.error!=="interrupted"&&ev.error!=="canceled")voiceNote("No pude reproducir la voz. Toca «Escuchar» para intentarlo otra vez y revisa que el volumen esté arriba y el modo silencio apagado.")};
+      try{synth.speak(u)}catch(e){}
+    });
+    try{synth.resume()}catch(e){}
+    startTimer=setTimeout(()=>{if(gen===speakGen&&!started)voiceNote("No se escucha a Bernabé. Toca «Escuchar» y revisa que el volumen esté arriba y el modo silencio apagado.")},3000);
+  };
+  if(wasBusy)setTimeout(run,120); else run();
+}
+
+/* ---------- Render ---------- */
+function renderSlide(focus){
+  const s=SLIDES[state.i];
+  const el=$("#slide");
+  el.innerHTML=`<div class="slide-in">${s.html()}</div>`;
+  $("#count").textContent=(state.i+1)+" / "+SLIDES.length;
+  $("#prog").style.width=((state.i)/(SLIDES.length-1)*100)+"%";
+  $("#prevBtn").disabled=state.i===0;
+  $("#nextBtn").disabled=state.i===SLIDES.length-1;
+  store.set("slide",state.i);
+  const ta=$("#commitTxt");
+  if(ta){let tm;ta.addEventListener("input",()=>{clearTimeout(tm);tm=setTimeout(()=>{store.set("commit",ta.value);$("#savedNote").textContent="Guardado en este dispositivo"},500)})}
+  renderRuta();
+  if(focus)el.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function rerenderSlide(){const y=window.scrollY;renderSlide(false);window.scrollTo(0,y)}
+function renderRuta(){
+  $("#rutaList").innerHTML=SLIDES.map((s,k)=>`<button class="ruta-item" data-act="go" data-k="${k}" aria-current="${k===state.i}"><span>${k+1}</span>${s.t}</button>`).join("");
+}
+
+function renderTutor(opts={}){
+  document.querySelectorAll("#modeBar button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===state.mode)));
+  const body=$("#tbody"); const s=SLIDES[state.i];
+  $("#askBox").hidden=state.mode!=="acompana";
+  if(!state.mode){
+    body.innerHTML=`<div class="bubble">¡Hola! Soy <b>Bernabé</b>. Mi nombre significa <i>hijo de consolación</i>, y voy a caminar contigo en esta lección.<br><br>¿Cómo quieres que te acompañe?</div>`+modeCards().replace('class="close-grid"','class="close-grid" style="grid-template-columns:1fr;margin-top:0"');
+    idle(); return;
+  }
+  if(state.mode==="ensena"){
+    body.innerHTML=`<div class="bubble"><span class="label">Lámina ${state.i+1} · ${esc(s.t)}</span>${esc(s.teach)}</div>
+      <div class="row"><button class="btn" data-act="replay">Escuchar otra vez</button>${state.i<SLIDES.length-1?`<button class="btn primary" data-act="next">Siguiente lámina</button>`:""}</div>
+      ${!synth?`<p class="muted">Tu navegador no tiene voz disponible; puedes leer la explicación aquí.</p>`:""}`;
+    if(opts.speak!==false)speak(s.teach); else idle();
+    return;
+  }
+  if(state.mode==="acompana"){
+    let h=`<div class="bubble"><span class="label">Para reflexionar · lámina ${state.i+1}</span>${esc(s.reflect)}</div>`;
+    h+=state.chat.map(m=>`<div class="bubble ${m.role==="user"?"me":""}">${esc(m.content)}</div>`).join("");
+    if(state.busy)h+=`<div class="bubble" id="liveAns">Pensando…</div><div class="row"><button class="btn" data-act="stop">Detener</button></div>`;
+    if(!state.chat.length&&!state.busy)h+=`<p class="muted">${sample?"Escríbeme cualquier duda sobre la lección y te respondo con base en ella.":"Puedes escribir tu respuesta o tu duda abajo. Si abres la lección desde tu cuenta de Claude, también puedo contestarte."}</p>`;
+    body.innerHTML=h; body.scrollTop=body.scrollHeight;
+    if(opts.speak!==false&&!state.chat.length)speak(s.reflect); else if(!state.busy)idle();
+    return;
+  }
+  if(state.mode==="reta"){renderCase(opts);return}
+  if(state.mode==="resume"){renderSummary(opts);return}
+}
+
+function renderCase(opts){
+  const body=$("#tbody");
+  if(state.caseI>=CASES.length){
+    const ok=CASES.filter((c,k)=>c.o[state.caseAns[k]]?.ok).length;
+    const miss=CASES.map((c,k)=>({c,k})).filter(x=>!x.c.o[state.caseAns[x.k]]?.ok);
+    body.innerHTML=`<div class="bubble"><span class="label">Resultado</span>Resolviste bien <b>${ok} de ${CASES.length}</b> casos.${miss.length?" Te sugiero repasar:":" ¡Excelente trabajo!"}</div>
+      ${miss.length?`<ul class="sumlist">${miss.map(x=>`<li><span><button class="linkish" data-act="go" data-k="${x.c.s}">${esc(SLIDES[x.c.s].t)}</button></span></li>`).join("")}</ul>`:""}
+      <div class="row"><button class="btn" data-act="caseReset">Volver a empezar</button></div>`;
+    if(opts.speak!==false)speak(`Resolviste bien ${ok} de ${CASES.length} casos.`);
+    return;
+  }
+  const c=CASES[state.caseI]; const a=state.caseAns[state.caseI];
+  let h=`<div class="bubble"><span class="label">Caso ${state.caseI+1} de ${CASES.length}</span>${esc(c.q)}<br><br><b>${esc(c.p)}</b></div><div style="display:grid;gap:8px">`;
+  h+=c.o.map((o,k)=>{let cls="";if(a!=null){if(o.ok)cls="right";else if(k===a)cls="wrong"}return `<button class="opt ${cls}" data-act="answer" data-k="${k}" ${a!=null?"disabled":""}>${esc(o.t)}</button>`}).join("")+"</div>";
+  if(a!=null){
+    const o=c.o[a];
+    h+=`<div class="fb ${o.ok?"ok":"no"}"><b>${o.ok?"¡Así es!":"No exactamente."}</b>${esc(o.ok?o.f:o.f+" "+c.o.find(x=>x.ok).f)}</div>`;
+    if(sample){h+=`<div style="display:grid;gap:8px"><label class="muted" for="whyTxt">Justifica tu decisión: ¿por qué elegiste esa respuesta?</label><textarea id="whyTxt" rows="2"></textarea><div class="row"><button class="btn" data-act="why">Que Bernabé lo comente</button></div><div id="whyOut"></div></div>`}
+    h+=`<div class="row"><button class="btn primary" data-act="nextCase">${state.caseI<CASES.length-1?"Siguiente caso":"Ver resultado"}</button><button class="btn ghost" data-act="go" data-k="${c.s}">Ver la lámina</button></div>`;
+  }
+  body.innerHTML=h;
+  if(opts.speak!==false&&a==null)speak(c.q+" "+c.p); else idle();
+}
+
+function renderSummary(opts){
+  const body=$("#tbody");
+  const done=Object.keys(state.quizAns).length===QUIZ.length;
+  let h=`<div class="bubble"><span class="label">Lo esencial</span><ul class="sumlist">${SUMMARY.map(x=>`<li><span>${esc(x.t)} <button class="linkish" data-act="go" data-k="${x.s}">Ver</button></span></li>`).join("")}</ul></div>`;
+  h+=`<p class="mini-title" style="margin-top:4px">¿Verdadero o falso?</p>`;
+  h+=QUIZ.map((q,k)=>{const a=state.quizAns[k];const right=a!=null&&a===q.a;return `<div style="display:grid;gap:6px"><p style="font-size:14.5px;font-weight:600">${k+1}. ${esc(q.q)}</p>
+    <div class="row"><button class="opt ${a===true?(right?"right":"wrong"):""}" style="width:auto" data-act="quiz" data-k="${k}" data-v="1" ${a!=null?"disabled":""}>Verdadero</button><button class="opt ${a===false?(right?"right":"wrong"):""}" style="width:auto" data-act="quiz" data-k="${k}" data-v="0" ${a!=null?"disabled":""}>Falso</button></div>
+    ${a!=null?`<p class="muted">${right?"Correcto. ":"Es "+(q.a?"verdadero":"falso")+". "}${esc(q.f)}</p>`:""}</div>`}).join("");
+  if(done){
+    const miss=QUIZ.map((q,k)=>({q,k})).filter(x=>state.quizAns[x.k]!==x.q.a);
+    h+=`<div class="fb ${miss.length?"no":"ok"}"><b>${QUIZ.length-miss.length} de ${QUIZ.length} correctas.</b>${miss.length?"Tus vacíos están en: "+[...new Set(miss.map(x=>x.q.s))].map(s=>`<button class="linkish" data-act="go" data-k="${s}">${esc(SLIDES[s].t)}</button>`).join(", ")+".":"No encontré vacíos. ¡Muy bien!"}</div><div class="row"><button class="btn" data-act="quizReset">Intentar de nuevo</button></div>`;
+  }
+  body.innerHTML=h;
+  if(opts.speak!==false)speak("Este es el resumen de la lección. Léelo y luego contesta verdadero o falso para encontrar tus vacíos."); else idle();
+}
+
+/* ---------- IA (opcional) ---------- */
+const RULES=()=>`Eres Bernabé, una ovejita que acompaña como tutor amable a personas de la Misión Cristiana Incluyente mientras estudian la lección "Arrepentimiento de Obras Muertas" (Doctrina Básica del Cristianismo, Escalera de Crecimiento Espiritual). Tu nombre significa "hijo de consolación".
+Reglas: responde en español de México, con calidez y sencillez, en 2 a 5 oraciones, sin listas largas ni formato markdown. Básate en el contenido de la lección que aparece abajo. Si algo no está en la lección, dilo con humildad y sugiere comentarlo con su líder o grupo. Esta iglesia recibe a todas las personas sin excepción: nunca juzgues, condenes ni avergüences a nadie. No cites versículos textualmente; puedes mencionar las referencias de la lección. Si la persona comparte algo personal o doloroso, responde con empatía y anímala a hablar con su líder o pastor. Si responde a una pregunta de reflexión, valora lo que comparte y hazle una pregunta breve para profundizar.
+Lámina actual: "${SLIDES[state.i].t}". Pregunta de reflexión mostrada: "${SLIDES[state.i].reflect}"
+
+Contenido de la lección:
+${LESSON_TEXT}`;
+function errCopy(e){const c=e&&e.code;if(c==="not_granted"||c==="sampling_disabled")return"No tengo permiso para responder aquí. Anota tu pregunta y llévala a tu grupo.";if(c==="rate_limited")return"Necesito un respiro. Inténtalo de nuevo en un momento.";if(c==="session_expired")return"Tu sesión expiró. Vuelve a iniciar sesión en Claude.";return"Algo falló al responder. Puedes intentarlo otra vez."}
+async function ask(text){
+  state.chat.push({role:"user",content:text});
+  if(!sample){
+    const q=store.get("questions",[]);q.push({slide:state.i,q:text});store.set("questions",q);
+    state.chat.push({role:"assistant",content:"¡Gracias por compartirlo! Guardé tu pregunta en este dispositivo para que la lleves a tu grupo. Para que yo pueda contestarte, abre esta lección desde tu cuenta de Claude."});
+    renderTutor({speak:false});return;
+  }
+  state.busy=true; renderTutor({speak:false}); setStatus("thinking","Pensando");
+  ctl=new AbortController();
+  const turns=[{role:"user",content:RULES()},...state.chat.slice(-10)];
+  try{
+    const {text}=await sample(turns,{cache:false,modelTier:"quick",signal:ctl.signal,onText:({text})=>{const el=$("#liveAns");if(el)el.textContent=text}});
+    state.chat.push({role:"assistant",content:text}); state.busy=false; renderTutor({speak:false}); speak(text);
+  }catch(e){
+    state.busy=false;
+    if(e&&e.code==="not_granted"||e&&e.code==="sampling_disabled")sample=null;
+    if(e&&e.code!=="cancelled")state.chat.push({role:"assistant",content:(e.text?e.text+"\n\n":"")+errCopy(e)});
+    else if(e&&e.text)state.chat.push({role:"assistant",content:e.text});
+    renderTutor({speak:false});
+  }
+}
+async function commentWhy(){
+  const why=($("#whyTxt")||{}).value||""; if(!why.trim()||!sample)return;
+  const c=CASES[state.caseI], o=c.o[state.caseAns[state.caseI]], right=c.o.find(x=>x.ok);
+  const out=$("#whyOut"); out.innerHTML=`<div class="bubble">Pensando…</div>`; setStatus("thinking","Pensando");
+  try{
+    const {text}=await sample(`${RULES()}\n\nLa persona resolvió este caso de práctica.\nCaso: ${c.q}\nPregunta: ${c.p}\nEligió: "${o.t}". Respuesta correcta según la lección: "${right.t}" (${right.f}).\nSu justificación: "${why}"\n\nEn 2 o 3 oraciones, reconoce lo valioso de su razonamiento y compleméntalo con la lección. Si su justificación tiene un error, corrígelo con amabilidad.`,{cache:false,modelTier:"quick",onText:({text})=>{out.firstChild&&(out.firstChild.textContent=text)}});
+    out.innerHTML=`<div class="bubble">${esc(text)}</div>`; speak(text);
+  }catch(e){out.innerHTML=`<p class="muted">${esc(errCopy(e))}</p>`;idle()}
+}
+
+/* ---------- Eventos ---------- */
+function go(k){stopVoice();state.i=Math.max(0,Math.min(SLIDES.length-1,k));renderSlide(true);
+  if(state.mode==="ensena"||state.mode==="acompana"){if(state.mode==="acompana")state.chat=[];renderTutor()}
+  else idle();
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b)return;
+  const a=b.dataset.act, k=+b.dataset.k;
+  switch(a){
+    case "next":go(state.i+1);break;
+    case "prev":go(state.i-1);break;
+    case "go":$("#drawer").hidden=true;go(k);break;
+    case "ruta":$("#drawer").hidden=false;break;
+    case "closeRuta":$("#drawer").hidden=true;break;
+    case "mode":state.mode=b.dataset.mode;store.set("mode",state.mode);$("#tutor").classList.add("open");renderTutor();if(state.i===SLIDES.length-1)rerenderSlide();break;
+    case "voice":state.voice=!state.voice;if(state.voice)setTimeout(()=>speak(lastSpoken||"Hola, soy Bernabé."),0);else voiceNote("");store.set("voice",state.voice);b.setAttribute("aria-pressed",String(state.voice));b.querySelectorAll(".w1,.w2").forEach(p=>p.style.display=state.voice?"":"none");if(!state.voice){stopVoice();idle()}break;
+    case "toggleTutor":$("#tutor").classList.toggle("open");break;
+    case "replay":speak(lastSpoken||SLIDES[state.i].teach);break;
+    case "read":ui.read[k]=!ui.read[k];store.set("read",ui.read);rerenderSlide();break;
+    case "hint":ui.hint=true;rerenderSlide();break;
+    case "step":ui.stepNote=k===0?"Escalón I: es la lección de hoy.":`Escalón ${ROMAN[k]}: ${STEPS[k]}. Lo estudiaremos en la lección ${ROMAN[k]}.`;$("#stairsNote").textContent=ui.stepNote;break;
+    case "flip":ui.flip[k]=!ui.flip[k];b.setAttribute("aria-expanded",String(ui.flip[k]));break;
+    case "sort":ui.sort[k]=b.dataset.v;rerenderSlide();break;
+    case "ind":ui.ind[k]=!ui.ind[k];store.set("ind",ui.ind);rerenderSlide();break;
+    case "three":ui.three[k]=!ui.three[k];b.setAttribute("aria-pressed",String(ui.three[k]));break;
+    case "answer":state.caseAns[state.caseI]=k;renderCase({speak:false});{const o=CASES[state.caseI].o[k];speak((o.ok?"¡Así es! ":"No exactamente. ")+o.f)}break;
+    case "nextCase":state.caseI++;renderCase({});break;
+    case "caseReset":state.caseI=0;state.caseAns={};renderCase({});break;
+    case "why":commentWhy();break;
+    case "quiz":state.quizAns[k]=b.dataset.v==="1";renderSummary({speak:false});break;
+    case "quizReset":state.quizAns={};renderSummary({speak:false});break;
+    case "stop":ctl&&ctl.abort();break;
+  }
+});
+$("#askBox").addEventListener("submit",e=>{e.preventDefault();const v=$("#askInput").value.trim();if(!v||state.busy)return;$("#askInput").value="";ask(v)});
+$("#askInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#askBox").requestSubmit()}});
+document.addEventListener("keydown",e=>{if(e.target.closest("textarea,input"))return;if(e.key==="ArrowRight")go(state.i+1);if(e.key==="ArrowLeft")go(state.i-1);if(e.key==="Escape")$("#drawer").hidden=true});
+if(window.matchMedia("(max-width:1040px)").matches&&state.mode)$("#tutor").classList.remove("open");
+if(!state.voice){const vb=$("#voiceBtn");vb.setAttribute("aria-pressed","false");vb.querySelectorAll(".w1,.w2").forEach(p=>p.style.display="none")}
+
+renderSlide(false);
+renderTutor({speak:false});
+if(window.claude&&window.claude.use){window.claude.use("sample").then(s=>{sample=s||null;if(state.mode==="acompana")renderTutor({speak:false})}).catch(()=>{})}
+})();
+</script>
+
+</body>
+</html>
